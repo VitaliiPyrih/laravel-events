@@ -58,8 +58,12 @@
                                         id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                     <span class="absolute -inset-1.5"></span>
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="h-10 w-10 rounded-full" src="{{asset('/assets/img/profile.png')}}"
-                                         alt="">
+                                    @if(auth()->user()->avatar)
+                                        <img class="h-10 w-10 rounded-full" src="{{auth()->user()->avatar}}"
+                                    @else
+                                        <img class="h-10 w-10 rounded-full" src="{{asset('/assets/img/profile.png')}}"
+                                             alt="">
+                                    @endif
                                 </button>
                             </div>
                             <div @click="console.log(123)"

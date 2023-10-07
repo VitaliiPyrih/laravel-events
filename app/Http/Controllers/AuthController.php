@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -54,10 +56,12 @@ class AuthController extends Controller
 
         $user = new User($validate);
 
+
         $user->save();
 
         Auth::login($user);
-        return to_route('welcome');
+        event(new Registered($user));
+        return to_route('verification.notice');
     }
 
     public function logout(Request $request)
@@ -123,5 +127,13 @@ class AuthController extends Controller
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
+    }
+
+    public function verifyEmail()
+    {
+        if (auth()->user() && auth()->user()->hasVerifiedEmail()) {
+            return to_route('profile');
+        }
+        return view('auth.verify-email');
     }
 }

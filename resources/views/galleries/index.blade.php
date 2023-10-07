@@ -2,8 +2,8 @@
     <x-slot name="header">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <div class="flex justify-between">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{__('Events')}}</h1>
-                <div class="text-lg"><a href="{{route('galleries.create')}}">{{__('New Gallery')}}</a></div>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{__('Галерея')}}</h1>
+                <div class="text-lg"><a href="{{route('galleries.create')}}">{{__('Додати галерею')}}</a></div>
             </div>
         </div>
     </x-slot>
@@ -60,7 +60,7 @@
                         @empty
                             <tr>
                                 <td colspan="4" class="px-6 py-4 text-center text-gray-500">
-                                    Пусто
+                                    Нічого немає
                                 </td>
                             </tr>
                         @endforelse

@@ -31,7 +31,7 @@
                         </div>
                     @empty
                         <div class="col-span-full text-center">
-                            <img class="w-1/2 mx-auto" src="{{asset('/assets/img/nothing.svg')}}" alt="Пусто">
+                            <img class="w-full md:w-1/2 mx-auto" src="{{asset('/assets/img/nothing.svg')}}" alt="Пусто">
                             <strong class="font-mono text-2xl">пусто:(</strong>
                         </div>
                     @endforelse

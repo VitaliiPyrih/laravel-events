@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewCommentAdded;
 use App\Models\Event;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Carbon\Carbon;
 
 class EventShowController extends Controller
 {
     public function __invoke(Event $event)
     {
+        event(new NewCommentAdded($event));
         $like = $event->likes()->where('user_id',auth()->user()?->id)->first();
         $savedEvent = $event->savedEvent()->where('user_id',auth()->user()?->id)->first();
         $attendings = $event->attendings()->where('user_id',auth()->user()?->id)->first();

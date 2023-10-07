@@ -16,11 +16,10 @@
             <div class="shadow-xl  inline-flex p-5 max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden">
                     <div class="text-gray-900 inline-flex font-semibold py-2  px-5">
-                        <span>{{ __("Ви залогінені успішно :)") }}</span>
+                        <span>Вітаємо вас: {{auth()->user()->name}}</span>
                     </div>
                 </div>
             </div>
-
         </div>
     </x-slot>
 </x-profile-layout>
