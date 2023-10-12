@@ -25,13 +25,13 @@
                     <div class="bg-white  w-full rounded-lg divide-y divide-gray-200">
                         <div class="px-5 py-7">
                             <label class="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
-                            <input type="email" name="email" value="{{old('email')}}"
+                            <input type="email" name="email" required value="{{old('email')}}"
                                    class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"/>
                             @error('email')
                             <div class="text-red-500 text-sm">{{ $message }}</div>
                             @enderror
                             <label class="font-semibold text-sm text-gray-600 pb-1 block">Пароль</label>
-                            <input type="text" name="password"
+                            <input type="password"  name="password"
                                    class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" required/>
                             @error('password')
                             <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -94,7 +94,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
                                 </svg>
-                                <span class="inline-block line-through ml-1">Help</span>
+                                <span class="inline-block line-through ml-1">Допомога</span>
                             </button>
                         </div>
                     </div>

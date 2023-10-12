@@ -14,7 +14,10 @@ class SendMailFrouUserCreated
 {
     public function handle(NewCommentAdded $events): void
     {
-        $user = User::with('events')->whereHas('events', fn ($e) => $e)->first()->email;
+        $test = Event::find(5);
+        $user = $test->load('user')->user->name;
+        $user = $test->user->name;
+        $user = User::with('events')->whereHas('events', fn ($e) => $e->where('id',$events->event->user_id))->first()->email;
         Mail::to($user)->send(new NewEmileAdded($events->event));
     }
 }

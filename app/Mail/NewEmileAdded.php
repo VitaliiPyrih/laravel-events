@@ -38,7 +38,8 @@ class NewEmileAdded extends Mailable
         return new Content(
             markdown: 'emails.comments.send',
             with: [
-                'id' => $this->event->id
+                'id' => $this->event->id,
+                'title' => $this->event->title
             ],
         );
     }

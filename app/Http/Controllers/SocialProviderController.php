@@ -19,12 +19,10 @@ class SocialProviderController extends Controller
         try {
             $socialUser = Socialite::driver($provider)->user();
             $user = User::where('provider_id', $socialUser->getId())->first();
-
             if (!$user) {
                 if (User::where('email',$socialUser->getEmail())->exists()) {
                     return redirect()->route('login')->with('email_taken', 'Ця електронна адреса вже використовується.');
                 }
-
                 $newUser = User::create([
                     'provider_id' => $socialUser->getId(),
                     'provider' => $provider,
@@ -35,6 +33,7 @@ class SocialProviderController extends Controller
                     'provider_token' => $socialUser->token,
                 ]);
 
+
                 Auth::login($newUser);
                 return redirect()->route('profile');
             } else {
@@ -42,7 +41,7 @@ class SocialProviderController extends Controller
                 return redirect()->route('profile');
             }
         } catch (\Exception $exception) {
-            dd($exception);
+//            dd($exception);
         }
     }
 }

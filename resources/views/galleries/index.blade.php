@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <div class="flex justify-between">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{__('Галерея')}}</h1>
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">{{__('Галерея')}}</h1>
                 <div class="text-lg"><a href="{{route('galleries.create')}}">{{__('Додати галерею')}}</a></div>
             </div>
         </div>

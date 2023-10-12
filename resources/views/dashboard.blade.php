@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <div class="flex justify-between">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{__('Панель керування')}}</h1>
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">{{__('Панель керування')}}</h1>
                 <div class="text-lg "><a
                         class="bg-gray-700 outline-2 outline-sky-300 focus:ring-2 rounded-2xl px-5 text-white py-1"
                         href="{{route('events.create')}}">{{__('Нова подія')}}</a></div>
