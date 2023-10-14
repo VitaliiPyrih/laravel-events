@@ -35,7 +35,7 @@ class Event extends Model
 //        'start_date' => 'date:m/d'
 //    ];
 
-    public function date($date)
+    public function date($date): string
     {
         return \Carbon\Carbon::parse($this->$date)->format('m/d/Y');
     }
@@ -54,6 +54,7 @@ class Event extends Model
     {
         return $this->belongsTo(City::class);
     }
+
 
     public function comments(): HasMany
     {

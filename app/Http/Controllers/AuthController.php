@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function __invoke(Request $request)
+    public function getLoginForm(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -45,7 +46,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function createUser(Request $request)
+    public function createUser(Request $request): RedirectResponse
     {
         $validate = $request->validate([
             'name' => 'required|string',
@@ -64,7 +65,7 @@ class AuthController extends Controller
         return to_route('verification.notice');
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
 
@@ -80,7 +81,7 @@ class AuthController extends Controller
         return view('auth.forgot-password');
     }
 
-    public function forgotPassword(Request $request)
+    public function forgotPassword(Request $request): RedirectResponse
     {
         $request->validate(['email' => 'required|email']);
 
@@ -102,7 +103,7 @@ class AuthController extends Controller
         return view('auth.reset-password', ['token' => $token]);
     }
 
-    public function newPassword(Request $request)
+    public function newPassword(Request $request): RedirectResponse
     {
         $request->validate([
             'token' => 'required',
@@ -129,7 +130,7 @@ class AuthController extends Controller
             : back()->withErrors(['email' => [__($status)]]);
     }
 
-    public function verifyEmail()
+    public function verifyEmail(): View|RedirectResponse
     {
         if (auth()->user() && auth()->user()->hasVerifiedEmail()) {
             return to_route('profile');

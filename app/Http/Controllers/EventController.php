@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateEventsRequest;
 use App\Models\Country;
 use App\Models\Event;
 use App\Models\Tag;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,7 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateEventsRequest $request)
+    public function store(CreateEventsRequest $request): RedirectResponse
     {
 
         if($request->hasFile('image')) {
@@ -46,20 +47,19 @@ class EventController extends Controller
             try {
                 DB::beginTransaction();
                 $data['image'] = Storage::putFile('events',$request->file('image'));
-                $data['user_id'] = Auth::user()->id;
+                $data['user_id'] = auth()->id();
                 $data['slug'] = Str::slug($data['title']);
 
 
-                $event = Event::create($data);
-                $event->tags()->attach($data['tags']);
-
+                $event = Event::query()->create($data);
+                $event->tags()->attach($data['tags'],['created_at' => now(),'updated_at' => now()]);
                 DB::commit();
-                return to_route('events.index');
             } catch (\Exception $error) {
                 DB::rollBack();
                 return redirect()->back()->withErrors(['city_error' => __('Виберіть місто'),'country_error' => __('Виберіть Країну')]);
             }
         }
+        return to_route('events.index');
     }
 
     /**
@@ -84,7 +84,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEventsRequest $request, Event $event)
+    public function update(UpdateEventsRequest $request, Event $event): RedirectResponse
     {
         $data = $request->validated();
         if($request->hasFile('image')) {
@@ -101,7 +101,7 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event): \Illuminate\Http\RedirectResponse
+    public function destroy(Event $event): RedirectResponse
     {
         Storage::delete($event->image);
         $event->tags()->detach();
